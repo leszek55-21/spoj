@@ -1,72 +1,39 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.ServiceConfigurationError;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 
 public class GLUTTON {
 
-    private static final int SECONDS_IN_DAY = 86400;
+    public static void main (String[] args) throws Exception{
 
-    public static void main (String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-        int numTestSets = scanner.nextInt();
-        scanner.nextLine();
-
-        if(!isInDataSetsRange(numTestSets)) {
-            throw new InputMismatchException();
-        }
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int numTestSets = Integer.parseInt(reader.readLine());
 
         String[] testCases = new String[numTestSets];
         for(int i = 0; i < testCases.length; i++){
-            testCases[i] = scanner.nextLine();
-        }
-        
+            testCases[i] = reader.readLine();
 
-        
-        for(String testCase: testCases) {
-            double sumBoxes;
-            String[] values = testCase.split("\\s+");
+            String[] values = testCases[i].split("\\s+");
+
             int numGuzzlers = Integer.parseInt(values[0]);
-            if(!isGuzzlerRange(numGuzzlers)) {
-                throw new InputMismatchException();
-            }
+
             int cakesInBox = Integer.parseInt(values[1]);
-            if(!isBoxesRange(cakesInBox)) {
-                throw new InputMismatchException();
-            }
+
             int[] times = new int[numGuzzlers];
-            for(int i = 0; i < times.length; i++) {
-                times[i] = scanner.nextInt();
-                scanner.nextLine();
+            for(int j = 0; j < times.length; j++) {
+                times[j] = Integer.parseInt(reader.readLine());
+
             }
             double cakesPerDay = 0;
             for(int time: times) {
-                cakesPerDay += SECONDS_IN_DAY / time;
+                cakesPerDay += 86400 / time;
             }
 
-            sumBoxes = cakesPerDay / cakesInBox;
-            if(sumBoxes % 1 != 0) {
-                sumBoxes += 1;
-                sumBoxes = Math.floor(sumBoxes);
-            }
-            System.out.println(sumBoxes);
-            
+            double sumBoxes = cakesPerDay / cakesInBox;
+
+            System.out.println((int)Math.ceil(sumBoxes));
+
         }
-
-
+        reader.close();
     }
-
-    private static boolean isInDataSetsRange (int number) {
-        return number > 0;
-    }
-
-    private static boolean isGuzzlerRange (int number) {
-        return number > 0 && number <= 10000;
-    }
-
-    private static boolean isBoxesRange (int number) {
-        return number > 0 && number <= 1000000000;
-    }
-
-
 }

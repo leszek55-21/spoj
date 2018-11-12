@@ -30,8 +30,6 @@ public class SkarbRough {
 
         String[][] dataSets = new String[numDataSets][];
         for (int i = 0; i < numDataSets; i++) {
-
-
             int numClues = scanner.nextInt();
             scanner.nextLine();
             if (!isInCluesRange(numClues)) {
