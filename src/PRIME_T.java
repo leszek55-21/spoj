@@ -7,7 +7,6 @@ public class PRIME_T {
         Scanner scanner = new Scanner(System.in);
         int numTests = scanner.nextInt();
 
-
         for (int i=0; i < numTests; i++) {
             int number = scanner.nextInt();
             if(number < 2) {
